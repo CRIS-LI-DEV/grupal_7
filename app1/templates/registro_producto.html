@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+
+<div class="cont-card">
+    <form method="POST">
+  {% csrf_token %}
+
+  {{ formulario }}
+  <button type="submit" class="w3-button w3-red w3-margin-bottom">Agregar Producto</button>
+  </form>
+</div>
+
+
+</div>
+  {% endblock %}

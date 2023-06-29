@@ -30,8 +30,8 @@ urlpatterns = [
     path('perfil/', login_required(perfil),name='perfil'),
     path('logout_view/', logout_view,name='logout_view'),
     path('lista/', listar_pedidos,name='lista'),
-    path('pedido/<int:id>', visualizar_pedidos, name='lista')
-
-
+    path('pedido/<int:id>', visualizar_pedidos, name='lista'),
+    path('registro_producto/', RegistroProducto.as_view(),name='registro_producto'),
+    path('productos/', lista_producto,name='lista')
     
 ]

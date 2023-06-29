@@ -7,3 +7,10 @@ class LoginUsuario(forms.Form):
 
 class SuscripcionEmail(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Ingrese su email','class':'w3-input'}) )
+
+
+class RegistroProductoForm(forms.Form):
+    nombre = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese el nombre del producto','class':'w3-input'}))
+    precio = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Ingrese el precio','class':'w3-input'}))
+    descripcion = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la descripción','class':'w3-input'}))
+      

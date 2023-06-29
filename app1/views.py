@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from app1.forms import LoginUsuario, SuscripcionEmail
+from app1.forms import *
 from django.contrib.auth import login, authenticate , logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
@@ -142,6 +142,29 @@ def visualizar_pedidos(request,id):
 
 
 
+class TomarPedidoStaff(View):
+    def get(request,self):
+        template=""
+        return render(request,template,context={})
+    def post(request,self):
+        pass
 
-def funcionprueba(request):
-    pass
+    
+
+class RegistroProducto(View):
+        def get(self, request):
+            template='registro_producto.html'
+            context = {'formulario': RegistroProductoForm}
+            return render(request,template,context)
+        
+        def post(self, request):
+            formulario = RegistroProductoForm(request.POST)
+            if formulario.is_valid():
+                producto = Producto(nombre =formulario['nombre'].value(),  precio =formulario['precio'].value(), descripcion = formulario['descripcion'].value() )
+                producto.save()
+                return redirect("/productos/")
+
+def lista_producto(request):
+          template= 'lista_productos.html'
+          context={'lista': Producto.objects.all()}
+          return render(request,template,context)
