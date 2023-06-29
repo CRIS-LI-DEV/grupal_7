@@ -138,3 +138,10 @@ def visualizar_pedidos(request,id):
                 'suma_cantidad':suma_cantidad['total'] 
              }
     return render(request,template,context)
+
+
+
+
+
+def funcionprueba(request):
+    pass
