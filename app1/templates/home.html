@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+
+
+
+
+
+<div class="w3-row justify">
+  <div class="w3-half cont-card" style="width:auto;">
+    <img src="{% static 'main_pic.png' %}" alt="">
+
+  </div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+<!-- Subscribe section -->
+<div class="w3-container w3-black w3-padding-32">
+  <h1>Registrate</h1>
+  <p>y obten los mejores precios al registrarte</p>
+
+  <form method="POST">
+  {% csrf_token %}
+
+  {{ formulario }}
+  <button type="submit" class="w3-button w3-red w3-margin-bottom">Registrarse</button>
+  </form>
+
+
+
+
+</div>
+{% endblock %}

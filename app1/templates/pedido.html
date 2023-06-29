@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+
+
+
+
+<div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
+ <div class="justify w3-black" ><h3 > Detalle Pedido : {{pedido.id}}</h3></div>
+
+    <table class="w3-table w3-bordered  w3-striped">
+
+        <tbody>
+
+
+            <tr>
+                  <td>EMPLEADO</td>
+                   <td> {{pedido.carrito.empleado.user.first_name}} {{pedido.carrito.empleado.user.last_name}} </td>
+           
+              
+            </tr>
+
+                 <tr>
+                  <td>CLIENTE</td>
+                
+                <td> {{pedido.carrito.cliente.user.first_name}} {{pedido.carrito.cliente.user.last_name}}</td>
+              
+            </tr>
+
+                   <tr>
+                  <td>DIRECCION</td>
+                
+                <td> {{pedido.calle_entrega}} </td>
+              
+            </tr>
+</tr>
+
+                   <tr>
+                  <td>COMUNA</td>
+                
+                <td> {{pedido.comuna}} </td>
+              
+            </tr>
+            </tr>
+
+                   <tr>
+                  <td>DIRECCION</td>
+                
+                <td> {{pedido.region}} </td>
+              
+            </tr>
+
+        </tbody>
+    </table>
+<hr>
+    <table class="w3-table w3-bordered  w3-striped">
+        <thead class="w3-black">
+            <tr>
+                <th>PRODUCTO</th>
+                <th>PRECIO</th>
+                <th>CANTIDAD</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in detalles%}
+            <tr>
+                <td>
+                    {{ x.producto.nombre}}
+                </td>
+                <td> {{ x.producto.precio}} </td>
+                <td> {{ x.cantidad}} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<hr>
+ <table class="w3-table w3-bordered ">
+
+        <tbody>
+
+
+            <tr>
+                  <td>TOTAL</td>
+                   <td> {{ suma_precio}}</td>
+           
+              
+            </tr>
+
+                 <tr>
+      <td>CANTIDAD TOTAL PRODUCTOS</td>
+                   <td> {{ suma_cantidad}}</td>
+              
+            </tr>
+        </tbody>
+ </table>
+    
+</div>
+</div>
+{% endblock %}

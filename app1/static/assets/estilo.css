@@ -1,0 +1,16 @@
+
+body {
+  font-family: "Raleway", Arial, sans-serif;
+  padding-top:120px;
+}
+
+.w3-row img {
+  margin-bottom: -8px
+}
+
+.justify {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}

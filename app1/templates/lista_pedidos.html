@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+
+
+<div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
+ <div class="justify w3-black" ><h3 > LISTA DE PEDIDOS</h3></div>
+<button class="w3-button w3-black w3-margin-bottom  w3-margin-top">AGREGAR PEDIDO</button>
+
+
+    <table class="w3-table  w3-bordered  w3-striped">
+        <thead class="w3-black">
+            <tr>
+                <th>ID</th>
+                <th>FECHA</th>
+                <th>DIRECCION</th>
+                <th>COMUNA</th>
+                <th>ESTADO</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in lista %}
+
+            <tr>
+
+                <td><button class="w3-button w3-black"><a href="/pedido/{{x.id}}">{{x.id}}</a></button> </td>
+                <td> {{x.fecha}}</td>
+                <td> {{x.direccion}}</td>
+                 <td> {{x.comuna}}</td>
+                  <td> {{x.estado}}</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}
