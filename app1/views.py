@@ -19,6 +19,7 @@ def generar_usuario_aleatorio():
 
 class HomeRegister(View):
     def get(self,request):
+        request.session['carrito']=[{"producto":1,"cantidad":3}] 
         formulario = SuscripcionEmail()
         context = {"formulario":formulario}
         return render (request, 'home.html', context)
@@ -139,14 +140,30 @@ def visualizar_pedidos(request,id):
              }
     return render(request,template,context)
 
-
+def visualizacion_producto(request, id_pr):
+    template="producto.html"
+    producto = Producto.objects.get(id=id_pr)
+    context={'producto': producto}
+    return HttpResponse(context['producto'])
+    #return render(request,template,context)
 
 
 class TomarPedidoStaff(View):
-    def get(request,self):
-        template=""
-        return render(request,template,context={})
-    def post(request,self):
+   
+    id_carrito = None
+    def get(self,request):
+   
+        carrito = Carrito(precio_total=0,cantidad_total=0)
+        carrito.save()
+        self.id_carrito = carrito.id
+       
+        lista = Producto.objects.all()
+       
+        template="tomar_pedido_staff.html"
+       
+        return render(request,template,context={'lista':lista})
+        #return HttpResponse(lista)
+    def post(self,request):
         pass
 
     
@@ -168,3 +185,13 @@ def lista_producto(request):
           template= 'lista_productos.html'
           context={'lista': Producto.objects.all()}
           return render(request,template,context)
+
+def funcion_para_guardar(request):
+    if request.method=="POST":
+        formulario = AgregarProductoFrom(request.POST)
+        carrito = request.session.get('carrito')
+
+        carrito.append({"producto":formulario['producto_id'].value(),"cantidad":formulario['cantidad_id'].value()})
+        
+        request.session['carrito'] = carrito
+        return HttpResponse(f"{carrito}")

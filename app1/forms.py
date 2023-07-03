@@ -14,3 +14,8 @@ class RegistroProductoForm(forms.Form):
     precio = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Ingrese el precio','class':'w3-input'}))
     descripcion = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la descripción','class':'w3-input'}))
       
+
+class AgregarProductoFrom(forms.Form):
+       producto_id = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Ingrese el precio','class':'w3-input'}))
+       cantidad_id = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Ingrese el precio','class':'w3-input'}))
+    

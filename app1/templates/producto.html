@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+<div class="cont-card">
+
+<table class=" w3-table w3-bordered">
+
+
+    <tbody>
+
+
+        <tr> <td>Nombre</td> <td>{{producto.nombre}}</td></tr>
+        
+        <tr>
+            <td>Precio</td>
+            <td>
+{{producto.precio}}</td></tr>
+        
+        <tr>
+            <td>Descripción</td>
+            <td>
+{{producto.descripcion}}
+</td></tr>
+    </tbody>
+</table>
+
+</div>
+</div>
+
+{% endblock %}

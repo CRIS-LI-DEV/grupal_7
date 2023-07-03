@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+
+
+<div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
+    <div class="justify w3-black">
+        <h3> LISTA DE PRODUCTOS</h3>
+    </div>
+
+
+    <table class="w3-table  w3-bordered  w3-striped">
+        <thead class="w3-black">
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>DESCRIPCIÓN</th>
+                <th>CANTIDADES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in lista %}
+
+            <tr>
+                <td> {{x.id}}</td>
+                <td><button class="w3-button w3-black"><a href="/producto/{{x.id}}">{{x.nombre}}</a></button> </td>
+                <td> {{x.precio}}</td>
+                <td> {{x.descripcion}}</td>
+                <td>
+                    <form action="/x/" method="POST">
+                         {% csrf_token %}
+                        <input type="number" class="" name="cantidad_id" style="width: 100px;"> 
+                         <input type="hidden" class="" name="producto_id" style="width: 100px;" value="{{x.id}}">
+                         <input type="submit" value="ingresar"> 
+                        
+                    </form>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -55,7 +55,7 @@ class Producto(models.Model):
 class Carrito(models.Model):
     cantidad_total =   models.IntegerField( null=True)
     precio_total = models.IntegerField( null=True)
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE,null=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, null=True)# NULL o ID EMPLEADO, if x== NULL
     
     def __str__(self):

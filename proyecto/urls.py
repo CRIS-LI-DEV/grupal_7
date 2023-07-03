@@ -32,6 +32,10 @@ urlpatterns = [
     path('lista/', listar_pedidos,name='lista'),
     path('pedido/<int:id>', visualizar_pedidos, name='lista'),
     path('registro_producto/', RegistroProducto.as_view(),name='registro_producto'),
-    path('productos/', lista_producto,name='lista')
+    path('productos/', lista_producto,name='lista'),
+    path('producto/<int:id_pr>', visualizacion_producto,name='lista'),
+    
+    path('tomar_pedido_staff/', TomarPedidoStaff.as_view(),name='asdasdsa'),
+    path('x/', funcion_para_guardar,name='asdasdsa')
     
 ]
