@@ -8,29 +8,31 @@
  <div class="justify w3-black" ><h3 > Detalle Pedido : {{pedido.id}}</h3></div>
 
     <table class="w3-table w3-bordered  w3-striped">
-
         <tbody>
-
-
+                <tr>
+                  <td>USERNAME EMPLEADO</td>
+                   <td> {{pedido.carrito.empleado.user}}  </td>
+            </tr>
             <tr>
-                  <td>EMPLEADO</td>
+                  <td>NOMBRE COMPLETO EMPLEADO</td>
                    <td> {{pedido.carrito.empleado.user.first_name}} {{pedido.carrito.empleado.user.last_name}} </td>
-           
-              
+            </tr>
+                <tr>
+                  <td>USERNAME CLIENTE</td>
+                <td> {{pedido.carrito.cliente.user.username}}</td>
             </tr>
 
+             <tr>
+                  <td>EMAIL CLIENTE</td>
+                <td> {{pedido.carrito.cliente.user.email}}</td>
+            </tr>
                  <tr>
-                  <td>CLIENTE</td>
-                
+                  <td>NOMBRE COMPLETO CLIENTE</td>
                 <td> {{pedido.carrito.cliente.user.first_name}} {{pedido.carrito.cliente.user.last_name}}</td>
-              
             </tr>
-
                    <tr>
                   <td>DIRECCION</td>
-                
                 <td> {{pedido.calle_entrega}} </td>
-              
             </tr>
 </tr>
 

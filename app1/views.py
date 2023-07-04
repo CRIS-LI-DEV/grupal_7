@@ -92,6 +92,21 @@ class Login_View(View):
                 if user is not None:
                     if user.is_active:
                         login(request,user)
+                        cliente = Cliente.objects.filter(
+                        user_id=user.id).count()
+                        empleado = Empleado.objects.filter(
+                        user_id=user.id).count()
+                        if cliente ==1 and empleado == 0 :
+                            return redirect('/perfil_cliente/')
+                        if cliente ==0 and empleado == 1 :
+                            return redirect('/perfil_empleado/')
+
+
+
+
+
+
+
                         return redirect('/perfil/')
                     else:
                         return HttpResponse("NO FUNCIONO")
@@ -101,8 +116,11 @@ class Login_View(View):
 
 
 
-def perfil(request):
-    return render(request, 'perfil.html')
+def perfil_cliente(request):
+    return render(request, 'perfil_cliente.html')
+
+def perfil_empleado(request):
+    return render(request, 'perfil_empleado.html')
 
 def logout_view(request):
 
@@ -158,10 +176,10 @@ class TomarPedidoStaff(View):
         self.id_carrito = carrito.id
        
         lista = Producto.objects.all()
-       
+        carrito = request.session.get("carrito")     
         template="tomar_pedido_staff.html"
        
-        return render(request,template,context={'lista':lista})
+        return render(request,template,context={'lista':lista, 'carrito': carrito})
         #return HttpResponse(lista)
     def post(self,request):
         pass
@@ -189,9 +207,131 @@ def lista_producto(request):
 def funcion_para_guardar(request):
     if request.method=="POST":
         formulario = AgregarProductoFrom(request.POST)
-        carrito = request.session.get('carrito')
 
+        if request.session.get('carrito') == None:
+        
+            request.session['carrito']=[]
+        
+        carrito = request.session.get('carrito')
+        
         carrito.append({"producto":formulario['producto_id'].value(),"cantidad":formulario['cantidad_id'].value()})
         
         request.session['carrito'] = carrito
-        return HttpResponse(f"{carrito}")
+        return redirect('/tomar_pedido_staff/')
+
+class FinalizarPedidoStaff(View):
+    def get(self,request):
+        carrito = request.session.get('carrito')
+        formulario = FormularioPedidoStaff()
+        template = 'finalizar_pedido.html'
+        context = {'formulario':formulario,'carrito':carrito}
+        return render(request,template,context)
+        
+
+    def post(self,request):
+        formulario = FormularioPedidoStaff(request.POST)
+   
+        if formulario.is_valid():
+            email = formulario.cleaned_data['cliente_email']
+            usuario_cliente =  User.objects.get(email=email)
+            print(usuario_cliente)
+            cliente = Cliente.objects.get(user_id= usuario_cliente.id)
+            usuario_empleado =  User.objects.get(id=request.user.id)
+           
+            empleado = Empleado.objects.get(id=request.user.id)
+            
+            carrito= Carrito(
+                cantidad_total= 0,
+                precio_total=0,
+                cliente = cliente,
+                empleado = empleado 
+                 )
+            carrito.save()
+            carrito_session = request.session.get('carrito')
+
+            for x in carrito_session:
+                producto = Producto.objects.get(id=x['producto'])
+                cantidad = x['cantidad']
+                detalle = DetalleProductoSocilicitado(
+                    producto =producto,
+                    cantidad= cantidad,
+                    valor_producto = producto.precio,
+                    carrito = carrito
+                 )
+                detalle.save()
+                estado = EstadoPedido.objects.get(id=1)
+                comuna = Comuna.objects.get(nombre=formulario.cleaned_data['comuna'])
+                region = Region.objects.get(nombre=formulario.cleaned_data['region'])
+                pedido = Pedido( 
+                    fecha = formulario.cleaned_data['fecha_entrega'],
+                    estado=estado,
+                    calle_entrega=formulario.cleaned_data['direccion'],
+                    comuna=comuna,
+                    region=region,
+                    carrito = carrito         
+                    
+                )        
+
+                pedido.save()
+        return HttpResponse(f"{formulario['direccion'].value()} {formulario['fecha_entrega'].value()}  {formulario['region'].value()}   {formulario['cliente_email'].value()}  {formulario['comuna'].value()}")
+
+
+
+class FinalizarPedidoCliente(View):
+    def get(self,request):
+        carrito = request.session.get('carrito')
+        formulario = FormularioPedidoCliente()
+        template = 'finalizar_pedido.html'
+        context = {'formulario':formulario,'carrito':carrito}
+        return render(request,template,context)
+        
+
+    def post(self,request):
+        formulario = FormularioPedidoCliente(request.POST)
+       
+        if formulario.is_valid():
+          
+            usuario_cliente =  User.objects.get(email=request.user.email)
+
+            cliente = Cliente.objects.get(user_id= usuario_cliente.id)
+        
+            
+            carrito= Carrito(
+                cantidad_total= 0,
+                precio_total=0,
+                cliente = cliente
+      
+                 )
+            carrito.save()
+            carrito_session = request.session.get('carrito')
+
+            for x in carrito_session:
+                producto = Producto.objects.get(id=x['producto'])
+                cantidad = x['cantidad']
+                detalle = DetalleProductoSocilicitado(
+                    producto =producto,
+                    cantidad= cantidad,
+                    valor_producto = producto.precio,
+                    carrito = carrito
+                 )
+                detalle.save()
+                estado = EstadoPedido.objects.get(id=1)
+                comuna = Comuna.objects.get(nombre=formulario.cleaned_data['comuna'])
+                region = Region.objects.get(nombre=formulario.cleaned_data['region'])
+                pedido = Pedido( 
+                    fecha = formulario.cleaned_data['fecha_entrega'],
+                    estado=estado,
+                    calle_entrega=formulario.cleaned_data['direccion'],
+                    comuna=comuna,
+                    region=region,
+                    carrito = carrito         
+                    
+                )        
+
+                pedido.save()
+        return HttpResponse(f"{formulario['direccion'].value()} {formulario['fecha_entrega'].value()}  {formulario['region'].value()}     {formulario['comuna'].value()}")
+
+
+def limpiar_carrito(request):
+    request.session['carrito']=[]
+    return HttpResponse("CARRITO LIMPIO")

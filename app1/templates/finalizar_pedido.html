@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block contenido %}
+{% load static %}
+
+
+<div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
+    <form method="POST">
+
+        {% csrf_token %}
+        {{formulario}}
+        <button type="submit" class="w3-button w3-black">Comprar</button>
+    </form>
+
+
+</div>
+
+<div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
+    {% for x in carrito %}
+    {{x }}
+    {% endfor %}
+</div>
+
+</div>
+{% endblock %}
