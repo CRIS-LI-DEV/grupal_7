@@ -1,0 +1,28 @@
+{% extends 'home.html' %} {% block contenido %} {% load static%}
+<div class="w3-row justify " >
+  <div class="w3-half w3-third w3-center cont-card">
+  
+    <div id="contenedor_img">
+      <img src="{% static 'logo4.png' %}" alt="" width="260px" />
+    </div>
+      <h2>CLIENTE</h2>
+     <div class="w3-panel w3-card w3-padding-16">
+<h1>   Bienvenido(a) {{user.first_name}} {{user.last_name}}</h1>
+
+      <table class="w3-table  w3-striped" >
+      <tbody>
+        <tr>
+          <td><h3>Nombre Usuario</h3></td>
+          <td><h3>{{user.email}}</h3></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    </div>
+    <button type="submit" class="w3-button w3-red w3-margin-bottom"><a href="/productos/" class="w3-bar-item w3-button w3-padding">Ver Productos</a></button>
+     
+    <br />
+  </div>
+</div>
+</div>
+{% endblock %}
