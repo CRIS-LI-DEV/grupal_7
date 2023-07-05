@@ -7,8 +7,8 @@
         <h3> LISTA DE PRODUCTOS</h3>
     </div>
 <button><a href="/limpiar_carrito/">LIMPIAR CARRITO</a></button>    
-<button><a href="/finalizar_pedido_staff/">FINALIZAR PEDIDO </a></button>    
-<!-- <button><a href="/finalizar_pedido_cliente/">FINALIZAR PEDIDO C</a></button>     -->
+<!-- <button><a href="/finalizar_pedido_staff/">FINALIZAR PEDIDO S</a></button>     -->
+<button><a href="/finalizar_pedido_cliente/">FINALIZAR PEDIDO </a></button>    
     <table class="w3-table  w3-bordered  w3-striped">
         <thead class="w3-black">
             <tr>
@@ -28,7 +28,7 @@
                 <td> {{x.precio}}</td>
                 <td> {{x.descripcion}}</td>
                 <td>
-                    <form action="/ag_pro_staff/" method="POST">
+                    <form action="/ag_pro_cliente/" method="POST">
                          {% csrf_token %}
                         <input type="number" class="" name="cantidad_id" style="width: 100px;"> 
                          <input type="hidden" class="" name="producto_id" style="width: 100px;" value="{{x.id}}">

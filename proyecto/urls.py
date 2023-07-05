@@ -27,19 +27,24 @@ urlpatterns = [
     path('',HomeRegister.as_view(), name='home'),
 
     path('login_view/', Login_View.as_view(),name='login_view'),
-    path('perfil/', login_required(perfil_cliente),name='perfil'),
-    path('perfil/', login_required(perfil_empleado),name='perfil'),
+    path('perfil_cliente/', login_required(perfil_cliente),name='perfil'),
+    path('perfil_empleado/', login_required(perfil_empleado),name='perfil'),
     path('logout_view/', logout_view,name='logout_view'),
     path('lista/', listar_pedidos,name='lista'),
     path('pedido/<int:id>', visualizar_pedidos, name='lista'),
+    path('pedido_e/<int:id>', visualizar_pedidos_e, name='lista'),
     path('registro_producto/', RegistroProducto.as_view(),name='registro_producto'),
     path('productos/', lista_producto,name='lista'),
     path('producto/<int:id_pr>', visualizacion_producto,name='lista'),
     
     path('tomar_pedido_staff/', TomarPedidoStaff.as_view(),name='asdasdsa'),
-    path('x/', funcion_para_guardar,name='asdasdsa'),
-    path('finalizar_pedido_staff',FinalizarPedidoStaff.as_view(),name='FINALIZAR_PEDIDO'),
+    path('tomar_pedido_cliente/', TomarPedidoStaff.as_view(),name='asdasdsa'),
+    path('ag_pro_cliente/', funcion_para_guardar_cliente,name='asdasdsa'),
+     path('ag_pro_staff/', funcion_para_guardar_staff,name='asdasdsa'),
+    path('finalizar_pedido_staff/',FinalizarPedidoStaff.as_view(),name='FINALIZAR_PEDIDO'),
      path('finalizar_pedido_cliente/',FinalizarPedidoCliente.as_view(),name='FINALIZAR_PEDIDO'),
-     path('limpiar_carrito/', limpiar_carrito,name="LIMPIAR_CARRITO")
+     path('limpiar_carrito/', limpiar_carrito,name="LIMPIAR_CARRITO"),
+     path('modificar_estado/<int:id_pedido>', modificar_estado_pedido,name="LIMPIAR_CARRITO"),
+     
    
 ]

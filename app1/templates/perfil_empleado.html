@@ -1,28 +1,63 @@
 {% extends 'home.html' %} {% block contenido %} {% load static%}
-<div class="w3-row justify " >
-  <div class="w3-half w3-third w3-center cont-card">
-  
-    <div id="contenedor_img">
-      <img src="{% static 'logo4.png' %}" alt="" width="260px" />
-    </div>
-      <h2>EMPLEADO</h2>
-     <div class="w3-panel w3-card w3-padding-16">
-<h1>   Bienvenido(a) {{user.first_name}} {{user.last_name}}</h1>
 
-      <table class="w3-table  w3-striped" >
-      <tbody>
-        <tr>
-          <td><h3>Nombre Usuario</h3></td>
-          <td><h3>{{user.email}}</h3></td>
-        </tr>
-      </tbody>
-    </table>
-    
-    </div>
-    <button type="submit" class="w3-button w3-red w3-margin-bottom"><a href="/productos/" class="w3-bar-item w3-button w3-padding">Ver Productos</a></button>
-     
-    <br />
+<div class="w3-container  w3-center cont-card">
+
+  <div id="contenedor_img">
+    <img src="{% static 'logo4.png' %}" alt="" width="260px" />
   </div>
+  <h2>EMPLEADO</h2>
+  <div class="w3-panel w3-card w3-padding-16">
+    <h1> Bienvenido(a) {{user.first_name}} {{user.last_name}}</h1>
+  </div>
+  <table class="w3-table  w3-striped">
+    <tbody>
+      <tr>
+        <td>
+          <h3>Nombre Usuario</h3>
+        </td>
+        <td>
+          <h3>{{user.email}}</h3>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+</div>
+
+
+<div class="w3-container w3-center cont-card">
+  <button><a href="/tomar_pedido_staff/">TOMAR PEDIDO</a></button>
+  <button><a href="/limpiar_carrito/">LIMIPIAR CARRITO</a></button>
+  <table class="w3-table  w3-bordered  w3-striped">
+    <thead class="w3-black">
+      <tr>
+        <th>ID</th>
+        <th>FECHA</th>
+        <th>DIRECCION</th>
+        <th>COMUNA</th>
+        <th>ESTADO</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in lista %}
+
+      <tr>
+
+        <td><button class="w3-button w3-black"><a href="/pedido_e/{{x.id}}">{{x.id}}</a></button> </td>
+        <td> {{x.fecha}}</td>
+        <td> {{x.calle_entrega}}</td>
+        <td> {{x.comuna}}</td>
+        <td> {{x.estado}}</td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 </div>
 {% endblock %}

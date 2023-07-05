@@ -1,4 +1,5 @@
- {% load static%}
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +30,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   justify-content: space-evenly;
 }
 .cont-card{
-  background: rgba(255,255,255,0.8); margin:10px ; padding: 30px;  border-radius: 20px
+  background: rgba(255,255,255,0.8);
+  margin: 10px;
+  padding: 30px;
+  border-radius: 20px;
 }
 </style>
 </head>
+
 <body class="w3-content" style="max-width:1200px">
 
 <!-- Sidebar/menu -->
@@ -48,48 +53,40 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <a href="#" class="w3-bar-item w3-button">Diseño</a>
     <a href="#" class="w3-bar-item w3-button">Audiovisual</a>
     <a href="#" class="w3-bar-item w3-button">Comics</a>
-     <a href="#" class="w3-bar-item w3-button">
-      
-       {% if user.is_authenticated %}
-       <a href="/lista/" class="w3-bar-item w3-button">Gestion de Productos</a>
-       {% else %}
-
-       {% endif %}
-     </a>
+    {% if user.is_authenticated %}
+    <a href="/lista/" class="w3-bar-item w3-button">Gestion de Productos</a>
+    {% endif %}
   </div>
   <a href="/" class="w3-bar-item w3-button w3-padding">HOME</a> 
   <a href="/productos/" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">PRODUCTOS</a> 
-  <a href="/login_view/"  class="w3-bar-item w3-button w3-padding">LOGIN</a>
-  <a href="/logout_view/"  class="w3-bar-item w3-button w3-padding">LOGOUT</a>
+  <a href="/login_view/" class="w3-bar-item w3-button w3-padding">LOGIN</a>
+  <a href="/logout_view/" class="w3-bar-item w3-button w3-padding">LOGOUT</a>
 </nav>
 
-
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">   <img src="{% static 'logo4.png' %}" alt="" width="100px" > </div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">   
+    <img src="{% static 'logo4.png' %}" alt="" width="100px">
+  </div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <div class="w3-main" style="margin-left:250px">
-
   <div class="w3-hide-large" style="margin-top:83px"></div>
   
-<div class="w3-container main"  >
-
- {% block contenido %}
- {% endblock %}
-
+  <div class="w3-container main">
+    {% block contenido %}
+    {% endblock %}
+  </div>
   
-
-
-  <div class="w3-black w3-center w3-padding-24"><img src="{% static 'logo1.png' %}" alt="" width="60px"> <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">grupo1</a></div>
-
-
+  <div class="w3-black w3-center w3-padding-24">
+    <img src="{% static 'logo1.png' %}" alt="" width="60px">
+    <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">grupo1</a>
+  </div>
 </div>
 
 <script>
-
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
   if (x.className.indexOf("w3-show") == -1) {
@@ -99,9 +96,7 @@ function myAccFunc() {
   }
 }
 
-
 document.getElementById("myBtn").click();
-
 
 function w3_open() {
   document.getElementById("mySidebar").style.display = "block";

@@ -27,6 +27,8 @@ class FormularioPedidoStaff(forms.Form):
     
         OPCIONES_REGION = tuple([(opcion, opcion) for opcion in opciones_region])
         OPCIONES_COMUNA = tuple([(opcion, opcion) for opcion in opciones_comuna] )
+        
+    
 
         direccion=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la descripción','class':'w3-input'}))
         fecha_entrega = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
@@ -50,7 +52,8 @@ class FormularioPedidoCliente(forms.Form):
     
         OPCIONES_REGION = tuple([(opcion, opcion) for opcion in opciones_region])
         OPCIONES_COMUNA = tuple([(opcion, opcion) for opcion in opciones_comuna] )
-
+        
+     
         direccion=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la descripción','class':'w3-input'}))
         fecha_entrega = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
        
@@ -65,3 +68,16 @@ class FormularioPedidoCliente(forms.Form):
         choices=OPCIONES_COMUNA,
         widget=forms.Select( attrs={'class':'w3-input'}))
 
+
+
+
+
+class FormularioEstado(forms.Form):
+
+        opciones_estado = EstadoPedido.objects.all().values_list('nombre', flat=True)
+    
+        OPCIONES_ESTADO = tuple([(opcion, opcion) for opcion in opciones_estado] )
+        
+        estado = forms.ChoiceField(
+        choices=OPCIONES_ESTADO,
+        widget=forms.Select( attrs={'class':'w3-input'}))
