@@ -57,7 +57,7 @@ class HomeRegister(View):
             rut='',
             comuna = comuna,
             region = region,
-            correo=''
+            correo=email
 
 
             )
@@ -286,8 +286,8 @@ def funcion_para_guardar_cliente(request):
             request.session['carrito']=[]
         
         carrito = request.session.get('carrito')
-        
-        carrito.append({"producto":formulario['producto_id'].value(),"cantidad":formulario['cantidad_id'].value()})
+        producto = Producto.objects.get(id=formulario['producto_id'].value())
+        carrito.append({"producto":formulario['producto_id'].value(),"cantidad":formulario['cantidad_id'].value(),'nombre':producto.nombre})
         
         request.session['carrito'] = carrito
         return redirect('/tomar_pedido_cliente/')
@@ -304,7 +304,9 @@ def funcion_para_guardar_staff(request):
         
         carrito = request.session.get('carrito')
         
-        carrito.append({"producto":formulario['producto_id'].value(),"cantidad":formulario['cantidad_id'].value()})
+        producto = Producto.objects.get(id=formulario['producto_id'].value())
+
+        carrito.append({"producto":formulario['producto_id'].value(),"cantidad":formulario['cantidad_id'].value(),'nombre':producto.nombre})
         
         request.session['carrito'] = carrito
         return redirect('/tomar_pedido_staff/')
@@ -342,7 +344,7 @@ class FinalizarPedidoStaff(View):
                  )
             carrito.save()
             carrito_session = request.session.get('carrito')
-
+            suma_precio=0
             for x in carrito_session:
                 producto = Producto.objects.get(id=x['producto'])
                 cantidad = x['cantidad']
@@ -353,6 +355,13 @@ class FinalizarPedidoStaff(View):
                     carrito = carrito
                  )
                 detalle.save()
+                suma_precio = suma_precio + (int(producto.precio) *int(cantidad))
+            suma_cantidad= DetalleProductoSocilicitado.objects.filter(carrito_id = carrito.id).aggregate(total=Sum('cantidad'))
+
+           
+            carrito.cantidad_total = suma_cantidad['total']
+            carrito.precio_total = suma_precio
+            carrito.save()
 
             estado = EstadoPedido.objects.get(id=1)
             comuna = Comuna.objects.get(nombre=formulario.cleaned_data['comuna'])
@@ -368,8 +377,7 @@ class FinalizarPedidoStaff(View):
                 )        
 
             pedido.save()
-            return HttpResponse(f"{formulario['direccion'].value()} {formulario['fecha_entrega'].value()}  {formulario['region'].value()}   {formulario['cliente_email'].value()}  {formulario['comuna'].value()}")
-
+            return redirect('/perfil_empleado')
 
 
 class FinalizarPedidoCliente(View):
@@ -399,7 +407,7 @@ class FinalizarPedidoCliente(View):
                  )
             carrito.save()
             carrito_session = request.session.get('carrito')
-
+            suma_precio=0
             for x in carrito_session:
                 producto = Producto.objects.get(id=x['producto'])
                 cantidad = x['cantidad']
@@ -410,6 +418,11 @@ class FinalizarPedidoCliente(View):
                     carrito = carrito
                  )
                 detalle.save()
+                suma_precio = suma_precio + (int(producto.precio) * int(cantidad))
+            suma_cantidad= DetalleProductoSocilicitado.objects.filter(carrito_id = carrito.id).aggregate(total=Sum('cantidad'))
+            carrito.cantidad_total = suma_cantidad['total']
+            carrito.precio_total = suma_precio
+            carrito.save()
             estado = EstadoPedido.objects.get(id=1)
             comuna = Comuna.objects.get(nombre=formulario.cleaned_data['comuna'])
             region = Region.objects.get(nombre=formulario.cleaned_data['region'])
@@ -424,12 +437,16 @@ class FinalizarPedidoCliente(View):
                 )        
 
             pedido.save()
-            return HttpResponse(f"{formulario['direccion'].value()} {formulario['fecha_entrega'].value()}  {formulario['region'].value()}     {formulario['comuna'].value()}")
+            return redirect('/perfil_cliente')
 
 
-def limpiar_carrito(request):
+def limpiar_carrito_staff(request):
     request.session['carrito']=[]
     return redirect('/tomar_pedido_staff/')
+
+def limpiar_carrito_cliente(request):
+    request.session['carrito']=[]
+    return redirect('/tomar_pedido_cliente/')
 
 
 

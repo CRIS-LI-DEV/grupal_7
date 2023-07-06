@@ -30,9 +30,9 @@ class FormularioPedidoStaff(forms.Form):
         
     
 
-        direccion=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la descripción','class':'w3-input'}))
-        fecha_entrega = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-        cliente_email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Ingrese su email','class':'w3-input'}))
+        direccion=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la direccion del pedido','class':'w3-input'}))
+        fecha_entrega = forms.DateField(widget=forms.DateInput(attrs={'type': 'date','class':'w3-input'}))
+        cliente_email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Ingrese el email para identificar el cliente','class':'w3-input'}))
         
         
 
@@ -53,10 +53,10 @@ class FormularioPedidoCliente(forms.Form):
         OPCIONES_REGION = tuple([(opcion, opcion) for opcion in opciones_region])
         OPCIONES_COMUNA = tuple([(opcion, opcion) for opcion in opciones_comuna] )
         
-     
-        direccion=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la descripción','class':'w3-input'}))
-        fecha_entrega = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-       
+    
+
+        direccion=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese la direccion del pedido','class':'w3-input'}))
+        fecha_entrega = forms.DateField(widget=forms.DateInput(attrs={'type': 'date','class':'w3-input'}))
         
         
 
@@ -67,7 +67,6 @@ class FormularioPedidoCliente(forms.Form):
         comuna = forms.ChoiceField(
         choices=OPCIONES_COMUNA,
         widget=forms.Select( attrs={'class':'w3-input'}))
-
 
 
 

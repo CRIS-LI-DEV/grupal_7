@@ -38,12 +38,13 @@ urlpatterns = [
     path('producto/<int:id_pr>', visualizacion_producto,name='lista'),
     
     path('tomar_pedido_staff/', TomarPedidoStaff.as_view(),name='asdasdsa'),
-    path('tomar_pedido_cliente/', TomarPedidoStaff.as_view(),name='asdasdsa'),
+    path('tomar_pedido_cliente/', TomarPedidoCliente.as_view(),name='asdasdsa'),
     path('ag_pro_cliente/', funcion_para_guardar_cliente,name='asdasdsa'),
      path('ag_pro_staff/', funcion_para_guardar_staff,name='asdasdsa'),
     path('finalizar_pedido_staff/',FinalizarPedidoStaff.as_view(),name='FINALIZAR_PEDIDO'),
      path('finalizar_pedido_cliente/',FinalizarPedidoCliente.as_view(),name='FINALIZAR_PEDIDO'),
-     path('limpiar_carrito/', limpiar_carrito,name="LIMPIAR_CARRITO"),
+     path('limpiar_carrito_staff/', limpiar_carrito_staff,name="LIMPIAR_CARRITO_STAFF"),
+      path('limpiar_carrito_cliente/', limpiar_carrito_cliente,name="LIMPIAR_CARRITO_CLIENTE"),
      path('modificar_estado/<int:id_pedido>', modificar_estado_pedido,name="LIMPIAR_CARRITO"),
      
    

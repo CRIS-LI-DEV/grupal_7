@@ -7,17 +7,13 @@
 
         {% csrf_token %}
         {{formulario}}
-        <button type="submit" class="w3-button w3-black">Comprar</button>
+        <hr>
+        <button type="submit" class="w3-button w3-black"> Finalizar </button>
     </form>
 
 
 </div>
 
-<div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
-    {% for x in carrito %}
-    {{x }}
-    {% endfor %}
-</div>
 
 </div>
 {% endblock %}

@@ -6,9 +6,11 @@
     <div class="justify w3-black">
         <h3> LISTA DE PRODUCTOS</h3>
     </div>
-<button><a href="/limpiar_carrito/">LIMPIAR CARRITO</a></button>    
-<!-- <button><a href="/finalizar_pedido_staff/">FINALIZAR PEDIDO S</a></button>     -->
-<button><a href="/finalizar_pedido_cliente/">FINALIZAR PEDIDO </a></button>    
+    <hr>
+    <button class="w3-btn w3-black"><a href="/limpiar_carrito_cliente/">LIMPIAR CARRITO</a></button>
+
+    <button class="w3-btn w3-black"><a href="/finalizar_pedido_cliente/">FINALIZAR PEDIDO </a></button>
+   <hr>
     <table class="w3-table  w3-bordered  w3-striped">
         <thead class="w3-black">
             <tr>
@@ -29,11 +31,11 @@
                 <td> {{x.descripcion}}</td>
                 <td>
                     <form action="/ag_pro_cliente/" method="POST">
-                         {% csrf_token %}
-                        <input type="number" class="" name="cantidad_id" style="width: 100px;"> 
-                         <input type="hidden" class="" name="producto_id" style="width: 100px;" value="{{x.id}}">
-                         <input type="submit" value="ingresar"> 
-                        
+                        {% csrf_token %}
+                        <input type="number" class="w3-input" name="cantidad_id" style="width: 100px;">
+                        <input type="hidden" class="" name="producto_id" style="width: 100px;" value="{{x.id}}">
+                        <input type="submit" class="w3-btn w3-red" value="ingresar">
+
                     </form>
             </tr>
 
@@ -43,18 +45,6 @@
 </div>
 
 
-
-
-<div class="cont-card" >
-
-{% for x in carrito %}
-{{ x}}
-
-
-
-{% endfor %}
-
-</div>
 
 
 

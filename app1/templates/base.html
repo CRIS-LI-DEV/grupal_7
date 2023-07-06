@@ -19,7 +19,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 .main{
   background-image: url("{% static 'fondo.jpg' %}");
   background-size: 100% 100%;
-  min-height: 600px;
+  min-height: 700px;
 }
 .men-ini{
   color: white;
@@ -38,7 +38,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
 
-<body class="w3-content" style="max-width:1200px">
+<body >
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
@@ -46,6 +46,18 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
     <img src="{% static 'logo1.png' %}" alt="" width="100px">
   </div>
+      <div class="w3-dropdown-hover w3-mobile">
+      <button class="w3-button">Carrito <i class="fa fa-caret-down"></i></button>
+      <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+       
+       
+        {% for x in request.session.carrito %}
+        
+        <a href="#" class="w3-bar-item w3-button w3-mobile">{{x.nombre}} : {{x.cantidad}}</a>
+       
+        {% endfor %}
+      </div>
+    </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
     <a href="#" class="w3-bar-item w3-button">Pinturas y Dibujos</a>
     <a href="#" class="w3-bar-item w3-button">Manualidades</a>

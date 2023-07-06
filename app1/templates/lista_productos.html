@@ -3,7 +3,11 @@
 
 
 <div class="w3-row cont-card" style="background-color: rgba(255,255,255,1);">
-    <div class="justify w3-black">
+ <button class="w3-btn w3-black">  <a href="/registro_producto/">REGISTRAR PRODUCTO</a></button> 
+ <hr>  
+ <div class="justify w3-black">
+ 
+ 
         <h3> LISTA DE PRODUCTOS</h3>
     </div>
 
@@ -15,7 +19,7 @@
                 <th>NOMBRE</th>
                 <th>PRECIO</th>
                 <th>DESCRIPCIÓN</th>
-                <th>CANTIDADES</th>
+               
             </tr>
         </thead>
         <tbody>
@@ -26,7 +30,7 @@
                 <td><button class="w3-button w3-black"><a href="/producto/{{x.id}}">{{x.nombre}}</a></button> </td>
                 <td> {{x.precio}}</td>
                 <td> {{x.descripcion}}</td>
-                <td></td>
+             
 
 
                    
@@ -36,11 +40,10 @@
            
             
         </tbody>
-        <form action=""> 
-            <button class="w3-button w3-black">
-               <a href="/producto/{{x.id}}">Agregar</a></button> </td>
+    
+              
            
-       </form>
+
     </table>
     
 </div>
